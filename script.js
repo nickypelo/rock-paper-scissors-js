@@ -50,16 +50,34 @@ playRound = (player, computer)=>{
     else if((player1 === scissors) && (computer1 === paper)){
         return "You Win! Rock beats Scissors";
     }
+    else {
+        return `Make a valid entry between Rock, Paper, Scissors`;
+
+    }
 
 
 }
 
-let playerSelection = getComputerChoice();
-let computerSelection = getComputerChoice();
+// let playerSelection = getComputerChoice();
+// let computerSelection = getComputerChoice();
 
 
-console.log(`Player has played ${playerSelection}`);
-console.log(`Computer has generated ${computerSelection}`);
-console.log(playRound(playerSelection, computerSelection));
+// console.log(`Player has played ${playerSelection}`);
+// console.log(`Computer has generated ${computerSelection}`);
+// console.log(playRound(playerSelection, computerSelection));
 
 
+game = () =>{
+    for(let i = 0; i <5; i++){
+        let playerOne = prompt("Rock, Paper or Scissors?");
+        let result = playRound(playerOne,getComputerChoice());
+        console.log(`For round ${i+1} ${result}`);
+        
+        // while(result.substring(0,5) === "Make"){
+        //     let ask = prompt("Rock, Paper or Scissors?");
+        // }
+        
+    }
+}
+
+game();
