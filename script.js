@@ -80,4 +80,6 @@ game = () =>{
     }
 }
 
-game();
+// game();
+
+console.log("Nicholas MJ")
