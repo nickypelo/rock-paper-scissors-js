@@ -44,7 +44,14 @@ button{
     
 }
 
-.results{
+.results, .winner{
     font-size: 1.5rem;
-    margin: auto;
+    margin: 25px;
+}
+
+.winner{
+    background-color: brown;
+    display: inline-block;
+    color: white;
+    padding: 0 15px;
 }

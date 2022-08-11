@@ -1,20 +1,5 @@
-// function getComputerChoice(){
-//     console.log("kota");
-// }
-
-// getComputerChoice();
-
-// food = () => {
-//     let words = "kota with atchaar";
-//     return `I like ${words}`
-// }
-
-// console.log(food());
-
-
 
 /*----------- RANDOMIZE THE COMPUTER'S PLAY -----------------*/
-
 getComputerChoice = () =>{
     const choice = ["rock", "paper", "scissors"];
     let rand = Math.random() * choice.length;
@@ -23,10 +8,9 @@ getComputerChoice = () =>{
     return choice[position];
 }
 
-// console.log(getComputerChoice());
+
 
 /*------------ FUNCTION THAT HANDLES THE USER'S SEECTION ------------ */
-
 playRound = (user, computer)=>{
     if(user === computer){
         return "It is a tie. No one wins!";
@@ -53,8 +37,9 @@ playRound = (user, computer)=>{
         return `Make a valid entry between Rock, Paper, Scissors`;
     }
 
-
 }
+
+
 
 
 // Select buttons
@@ -62,15 +47,21 @@ const options = document.querySelectorAll('.btn');
 const play = document.querySelector('.play');
 
 
+
+
 // display changes
 const selected = document.querySelector('.selected');
 const results = document.querySelector('.results');
+const winner = document.querySelector('.winner');
+
+
 
 
 // ROUND COUNTERS: THESE VARIABLES WILL BE  PLACE HOLDERS FOR THE ROUNDS, WINS AND LOSSES OF THOSE ROUNDS
 let count = 0;
 let wins = 0;
 let loss = 0;
+
 
 
 
@@ -91,24 +82,19 @@ outcome = (result) =>{
 }
 
 
-// FUNCTION THAT DISPLAYS THE FINAL WINNER
-overall = (count) =>{
-    if(count == 5){
-        if(wins > loss){
-            results.textContent = 'The world is yours. You win it all';
-            reset();
-        }
-        else if(wins < loss){
-            results.textContent = "We are doomed. Led by a loser";
-            reset();
-        }
-        else{
-            results.textContent = "We'll Get em next time";
-            reset();
 
-        }
+// FUNCTION THAT DISPLAYS THE FINAL WINNER
+overall = () =>{
+    if(wins == 5){
+        winner.textContent = `The world is yours. You win it all after ${count} rounds.`;
+        
+    }
+    else if(loss == 5){
+        winner.textContent = `You lose! After ${count} rounds, We are doomed. Led by a loser`;
+        
     }
 }
+
 
 
 // RESET AFTER 5 ROUNDS
@@ -118,22 +104,28 @@ reset = () =>{
     count = 0;
 }
 
+
+
+
+// USER OPTIONS DISPLAYED 
 options.forEach((button) =>{
     button.addEventListener('click', ()=>{
         selected.textContent = button.id;
         results.textContent = '';
+        winner.textContent= '';
     })
 })
 
 
-//BUTTON THAT PLAYS THE GAME.
 
+
+//BUTTON THAT PLAYS THE GAME.
 play.addEventListener('click', ()=>{
-    count++;
     let user = selected.textContent; //receives input from the user after they select the button with options.
     let result = playRound(user, getComputerChoice()); // uses the 
     outcome(result);
+    count++;
     results.textContent = `For round ${count} ${result}`;
-    overall(count)
+    overall()
 
-})
+});
