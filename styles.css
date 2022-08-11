@@ -33,10 +33,18 @@ button{
     border-radius: 50%;
     background-color: green;
     color: white;
-    
+    margin-bottom: 25px;
     border: 2px solid #333;
 }
 
 .selected{
-    margin: 20px;
+    margin: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    
+}
+
+.results{
+    font-size: 1.5rem;
+    margin: auto;
 }

@@ -11,75 +11,129 @@
 
 // console.log(food());
 
+
+
+/*----------- RANDOMIZE THE COMPUTER'S PLAY -----------------*/
+
 getComputerChoice = () =>{
-    const options = ["Rock", "Paper", "Scissors"];
-    let rand = Math.random() * options.length;
+    const choice = ["rock", "paper", "scissors"];
+    let rand = Math.random() * choice.length;
     let position = Math.floor(rand);
 
-    return options[position];
+    return choice[position];
 }
 
 // console.log(getComputerChoice());
 
-playRound = (player, computer)=>{
-    let rock= "rock";
-    let paper= "paper";
-    let scissors= "scissors";
+/*------------ FUNCTION THAT HANDLES THE USER'S SEECTION ------------ */
 
-    let player1 = player.toLowerCase();
-    let computer1 = computer.toLowerCase();
-
-    if(player1 === computer1){
+playRound = (user, computer)=>{
+    if(user === computer){
         return "It is a tie. No one wins!";
     }
-    else if((player1 === rock) && (computer1 === paper)) {
+    else if((user === 'rock') && (computer === 'paper')) {
         return "You Lose! Paper beats Rock";
     }
-    else if((player1 === paper) && (computer1 === rock)){
+    else if((user === 'paper') && (computer === 'rock')){
         return "You Win! Paper beats Rock";
     }
-    else if((player1 === scissors) && (computer1 === rock)){
+    else if((user === 'scissors') && (computer === 'rock')){
         return "You Lose! Rock beats Scissors";
     }
-    else if((player1 === rock) && (computer1 === scissors)){
+    else if((user === 'rock') && (computer === 'scissors')){
         return "You Win! Rock beats Scissors";
     }
-    else if((player1 === paper) && (computer1 === scissors)){
+    else if((user === 'paper') && (computer === 'scissors')){
         return "You Lose! Rock beats Scissors";
     }
-    else if((player1 === scissors) && (computer1 === paper)){
+    else if((user === 'scissors') && (computer === 'paper')){
         return "You Win! Rock beats Scissors";
     }
     else {
         return `Make a valid entry between Rock, Paper, Scissors`;
-
     }
 
 
 }
 
-// let playerSelection = getComputerChoice();
-// let computerSelection = getComputerChoice();
+
+// Select buttons
+const options = document.querySelectorAll('.btn');
+const play = document.querySelector('.play');
 
 
-// console.log(`Player has played ${playerSelection}`);
-// console.log(`Computer has generated ${computerSelection}`);
-// console.log(playRound(playerSelection, computerSelection));
+// display changes
+const selected = document.querySelector('.selected');
+const results = document.querySelector('.results');
 
 
-game = () =>{
-    for(let i = 0; i <5; i++){
-        let playerOne = prompt("Rock, Paper or Scissors?");
-        let result = playRound(playerOne,getComputerChoice());
-        console.log(`For round ${i+1} ${result}`);
+// ROUND COUNTERS: THESE VARIABLES WILL BE  PLACE HOLDERS FOR THE ROUNDS, WINS AND LOSSES OF THOSE ROUNDS
+let count = 0;
+let wins = 0;
+let loss = 0;
+
+
+
+// FUNCTION THAT INCREMENTS WINS AND LOSSES
+outcome = (result) =>{
+    if(result.substring(0,7) === 'You Win'){
+        wins++;
+    }
+    else if(result.substring(0,8) === "You Lose"){
+        loss++;
+    }
+    else if((result.substring(0,2) === "It")){
         
-        // while(result.substring(0,5) === "Make"){
-        //     let ask = prompt("Rock, Paper or Scissors?");
-        // }
-        
+    }    
+    else{
+        count--;
     }
 }
 
-// game();
 
-console.log("Nicholas MJ")
+// FUNCTION THAT DISPLAYS THE FINAL WINNER
+overall = (count) =>{
+    if(count == 5){
+        if(wins > loss){
+            results.textContent = 'The world is yours. You win it all';
+            reset();
+        }
+        else if(wins < loss){
+            results.textContent = "We are doomed. Led by a loser";
+            reset();
+        }
+        else{
+            results.textContent = "We'll Get em next time";
+            reset();
+
+        }
+    }
+}
+
+
+// RESET AFTER 5 ROUNDS
+reset = () =>{
+    wins = 0;
+    loss = 0;
+    count = 0;
+}
+
+options.forEach((button) =>{
+    button.addEventListener('click', ()=>{
+        selected.textContent = button.id;
+        results.textContent = '';
+    })
+})
+
+
+//BUTTON THAT PLAYS THE GAME.
+
+play.addEventListener('click', ()=>{
+    count++;
+    let user = selected.textContent; //receives input from the user after they select the button with options.
+    let result = playRound(user, getComputerChoice()); // uses the 
+    outcome(result);
+    results.textContent = `For round ${count} ${result}`;
+    overall(count)
+
+})
