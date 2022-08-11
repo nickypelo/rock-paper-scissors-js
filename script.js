@@ -10,7 +10,7 @@ getComputerChoice = () =>{
 
 
 
-/*------------ FUNCTION THAT HANDLES THE USER'S SEECTION ------------ */
+/*------------ FUNCTION THAT HANDLES THE USER'S SELECTION ------------ */
 playRound = (user, computer)=>{
     if(user === computer){
         return "It is a tie. No one wins!";
@@ -43,7 +43,7 @@ playRound = (user, computer)=>{
 
 
 // Select buttons
-const options = document.querySelectorAll('.btn');
+const options = document.querySelectorAll('.btn'); // select rock paper scissors buttons by class
 const play = document.querySelector('.play');
 
 
@@ -84,7 +84,7 @@ outcome = (result) =>{
 
 
 // FUNCTION THAT DISPLAYS THE FINAL WINNER
-overall = () =>{
+overallWinner = () =>{
     if(wins == 5){
         winner.textContent = `The world is yours. You win it all after ${count} rounds.`;
         reset();
@@ -112,8 +112,8 @@ reset = () =>{
 options.forEach((button) =>{
     button.addEventListener('click', ()=>{
         selected.textContent = button.id;
-        results.textContent = '';
-        winner.textContent= '';
+        results.textContent = ''; // refreshes round results
+        winner.textContent= ''; // refreshes and resets overall winner after announcement
     })
 })
 
@@ -128,6 +128,6 @@ play.addEventListener('click', ()=>{
     outcome(result);
     count++;
     results.textContent = `For round ${count} ${result}`;
-    overall()
+    overallWinner();
     
 });
