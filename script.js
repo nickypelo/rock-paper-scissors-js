@@ -87,21 +87,22 @@ outcome = (result) =>{
 overall = () =>{
     if(wins == 5){
         winner.textContent = `The world is yours. You win it all after ${count} rounds.`;
-        
+        reset();
     }
     else if(loss == 5){
         winner.textContent = `You lose! After ${count} rounds, We are doomed. Led by a loser`;
-        
+        reset();
     }
 }
 
 
 
-// RESET AFTER 5 ROUNDS
+// RESET AFTER WINNER IS ANNOUNCED
 reset = () =>{
     wins = 0;
     loss = 0;
     count = 0;
+    selected.textContent = '?';
 }
 
 
@@ -121,11 +122,12 @@ options.forEach((button) =>{
 
 //BUTTON THAT PLAYS THE GAME.
 play.addEventListener('click', ()=>{
+    winner.textContent = '';
     let user = selected.textContent; //receives input from the user after they select the button with options.
     let result = playRound(user, getComputerChoice()); // uses the 
     outcome(result);
     count++;
     results.textContent = `For round ${count} ${result}`;
     overall()
-
+    
 });
